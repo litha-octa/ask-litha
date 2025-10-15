@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Ask Litha 🤖
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React application that serves as an AI assistant interface. Built with React, TypeScript, Vite, and integrated with a Netlify serverless function for AI text generation.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-18.x-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Vite](https://img.shields.io/badge/Vite-5.x-purple)
+![Netlify](https://img.shields.io/badge/Netlify-Deployed-teal)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Modern UI**: Clean, responsive design with background styling
+- **AI-Powered**: Integrated with AI text generation via Netlify functions
+- **Type Safety**: Built with TypeScript for better development experience
+- **Fast Development**: Powered by Vite for quick builds and hot reloading
+- **Conversation History**: Maintains and displays all previous responses
+- **CORS Handling**: Properly configured proxy for seamless API communication
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Quick Start
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 16+ 
+- npm or yarn
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/litha-octa/ask-litha.git
+   cd ask-litha
+2. **Install depedencies**
+    ```bash
+   npm install
+3. **Start development server**
+    ```bash
+   npm run dev
+4. **Open your browser**
+Navigate to http://localhost:5173
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+npm run dev - Start development server
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+npm run build - Build for production
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+npm run lint - Run ESLint
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+npm run preview - Preview production build
+
+### API
+  The underlying API infrastructure and serverless functions powering this application are available in a dedicated repository:
+    https://github.com/litha-octa/Implementing-Gemini-AI-using-Express
+
+### Project Architecture
+     ```bash
+    ask-litha/<br/>
+    ├── src/<br/>
+    │   ├── App.tsx          # Main application component<br/>
+    │   ├── main.tsx         # Application entry point<br/>
+    │   ├── index.css        # Global styles<br/>
+    │   └── vite-env.d.ts    # Vite type definitions<br/>
+    ├── index.html           # HTML template<br/>
+    ├── vite.config.ts       # Vite configuration<br/>
+    ├── package.json<br/>
+    └── netlify.toml         # Netlify deployment config<br/>
+
+## Built with ❤️ by Litha
