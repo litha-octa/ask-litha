@@ -1,10 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
+import { generateText } from "./utils/api";
 import "./App.css"; // import your CSS file
 
 function App() {
   const [prompt, setPrompt] = useState("");
-  const [responses, setResponses] = useState<string[]>([]);
+  const [responses, setResponses] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -14,40 +14,27 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await axios.post<{ response: string }>(
-        "/api/generate-text", // Now using the proxy path
-        { prompt },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setResponses((prevResponses) => [...prevResponses, res?.data?.response]);
+      const res = await generateText(prompt);
+      setResponses(res?.response);
       setPrompt("");
     } catch (err) {
       console.log(err);
-      setResponses((prevResponses) => [
-        ...prevResponses,
-        "Error fetching response",
-      ]);
+      setResponses("Error fetching response");
     } finally {
       setLoading(false);
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
     }
   };
 
   return (
     <div className="app-container">
       <h1 className="app-title">AskLitha!</h1>
-      {responses.length > 0 && (
-        <div className="app-response">
-          {responses.map((response, index) => (
-            <div key={index} className="response-item">
-              {response}
-            </div>
-          ))}
-        </div>
-      )}
+      {responses && <div className="app-response">{responses}</div>}
 
       <form onSubmit={handleSubmit} className={`app-form move-bottom`}>
         <textarea
@@ -56,6 +43,7 @@ function App() {
           placeholder="Tanyakan apa saja"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
+          onKeyDown={handleKeyDown}
         ></textarea>
         <button type="submit" className="app-button" disabled={loading}>
           {loading ? "..." : "→"}
